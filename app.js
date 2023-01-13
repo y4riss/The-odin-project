@@ -1,6 +1,7 @@
 
 const playBtn = document.querySelector(".play");
 const divChoices = document.querySelector(".choices");
+const navBar = document.querySelector("nav");
 const imgChoices = document.querySelectorAll(".img-choice");
 const playerScoreDiv = document.querySelector("#player-score");
 const computerScoreDiv = document.querySelector("#computer-score");
@@ -29,6 +30,8 @@ playBtn.addEventListener("click", () => {
     setTimeout(() => {
         playBtn.classList.add("hide");
         divChoices.classList.remove("hide");
+        navBar.classList.remove("hide");
+
     }, 500);
 
 })
