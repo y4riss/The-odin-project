@@ -13,6 +13,11 @@ const computerDivChoice = document.querySelector("#computer-choice");
 const resultMsg = document.querySelector(".result");
 const makeChoiceMsg = document.querySelector(".make-choice");
 
+const playAgainBtn = document.querySelector(".play-again");
+const finalMsg = document.querySelector("#final-msg");
+
+const popup = document.querySelector(".popup");
+
 let playerImgChoice ;
 let computerImgChoice ;
 
@@ -31,6 +36,8 @@ playBtn.addEventListener("click", () => {
         playBtn.classList.add("hide");
         divChoices.classList.remove("hide");
         navBar.classList.remove("hide");
+        alert("First to 5 wins , good luck");
+
 
     }, 500);
 
@@ -55,8 +62,22 @@ const playRound = (playerSelection, computerSelection) => {
     return -1;
 }
 
-const updateRound = (result) =>{
+const updateRound = (result,playerSelection,computerSelection) =>{
+
+    if (roundCount == 1)
+    {
+        playerImgChoice = document.createElement("img");
+        computerImgChoice = document.createElement("img");
+
+        playerDivChoice.appendChild(playerImgChoice);
+        computerDivChoice.appendChild(computerImgChoice);
+
+        makeChoiceMsg.classList.add("hide");
+    }
+    playerImgChoice.src = `assets/${playerSelection}.png`;
+    computerImgChoice.src = `assets/${computerSelection}.png`;
     roundCountDiv.textContent = `Round ${++roundCount}`
+
     if (result > 0)
     {
         playerScoreDiv.textContent = `You : ${++playerScore}`;
@@ -73,6 +94,55 @@ const updateRound = (result) =>{
 
     }
 
+}
+
+const checkWinner = () =>
+{
+    let winner = 0;
+    if (playerScore == 5)
+    {
+        finalMsg.textContent = "Congrats, you won !";
+        winner = 1;
+    }
+    else if (computerScore == 5)
+    {
+        finalMsg.textContent = "You lost !"
+        winner = 1;
+    }
+    if (winner == 1)
+    {
+        popup.classList.remove("hide");
+        return 1;
+    }
+    return 0;
+}
+
+playAgainBtn.addEventListener("click",()=>{
+
+    popup.classList.add("no-opacity");
+    setTimeout(() => {
+        popup.classList.add("hide");
+        makeChoiceMsg.classList.remove("hide");
+        resetGame();
+        popup.classList.remove("no-opacity");
+
+    }, 500);
+
+
+})
+
+const resetGame = () => {
+
+    playerScore = 0;
+    computerScore = 0;
+    roundCount = 1;
+
+    playerDivChoice.innerHTML = "";
+    computerDivChoice.innerHTML = "";
+    playerScoreDiv.textContent = `You : ${playerScore}`;
+    computerScoreDiv.textContent = `${computerScore} : Computer`;
+    roundCountDiv.textContent = `Round ${roundCount}`
+    resultMsg.textContent = "";
 
 
 }
@@ -83,21 +153,7 @@ imgChoices.forEach(choice => {
         const playerSelection = arr[arr.length - 1].split(".")[0];
         const computerSelection = getComputerChoice();
         const result = playRound(playerSelection , computerSelection);
-
-        if (roundCount == 1)
-        {
-            playerImgChoice = document.createElement("img");
-            computerImgChoice = document.createElement("img");
-
-            playerDivChoice.appendChild(playerImgChoice);
-            computerDivChoice.appendChild(computerImgChoice);
-
-            makeChoiceMsg.classList.add("hide");
-        }
-        playerImgChoice.src = `assets/${playerSelection}.png`;
-        computerImgChoice.src = `assets/${computerSelection}.png`;
-        updateRound(result);
-
-
+        updateRound(result,playerSelection,computerSelection);
+        checkWinner();
     });
 })

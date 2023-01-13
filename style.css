@@ -15,6 +15,7 @@ html{
     height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
     color : #fff;
 }
 
@@ -31,7 +32,7 @@ html{
     justify-content: center;
     height: 100vh;
 }
-.play
+.play,.play-again button
 {
     outline: none;
     border: none;
@@ -144,6 +145,38 @@ img {
     text-align: center;
 }
 
+.popup
+{
+ height : 100vh;
+ width : 100%;
+ background : rgba(0, 0, 0, 0.412);
+ position : absolute;
+ display: flex;   
+ align-items: center;
+ justify-content: center;
+}
+
+.play-again
+{
+    background : #604135;
+    width : 50%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap : 20px;
+    font-size : 1.5rem;
+    border-radius: 5px;
+
+}
+
+.play-again button{
+    font-size : 3rem;
+}
+
+
 .hide{
     display: none;
 }
+
