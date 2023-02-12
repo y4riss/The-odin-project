@@ -143,17 +143,21 @@ thead{
     margin-bottom : 1rem;
 }
 tbody{
-    background-color: var(--darker);
+    background-color :#a09a8a;
 }
 
 tr:nth-child(even)
 {
-    background:var(--dark)
+    background:#26312f;
 }
 table,tr,td{
     border-collapse: collapse;
     padding: .5rem;
     color : white;  
+}
+
+.fa-trash,.fa-edit{
+    cursor : pointer;
 }
 
 
@@ -188,8 +192,13 @@ form input{
     padding: .3rem 1rem;
 }
 
+.error-msg{
+    color : red;
+    white-space: break-spaces;
+}
+
 form > * {
-    margin : .5rem;
+    margin : .2rem .5rem;
 }
 
 .add-book-window .close-btn{
@@ -246,7 +255,22 @@ form > * {
     .wrapp{
         width : 100%;
     }
-    .books,.search{
+    .books{
         margin-inline : 1rem;
+    }
+}
+
+@media screen  and (max-width : 480px){
+
+    table{
+        width: 100%;
+    }
+    .books{
+        margin-inline : 0;
+        overflow-x:scroll;
+
+    }
+    .header{
+        display: block;
     }
 }

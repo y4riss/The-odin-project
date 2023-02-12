@@ -15,30 +15,22 @@
     <div class="header">
         <div class="info">
             <h3 class="text-center" >General information</h3>
-            <p><i class="fa-solid fa-book"></i> Total books : 0</p>
-            <p><i class="fa-solid fa-file"></i> Total pages : 0</p>
-            <p><i class="fa-solid fa-check text-success"></i> Read books : 0</p>
-            <p><i class="fa-solid fa-xmark text-danger"></i> Unread books : 0</p>
+            <p class="info-p" ></p>
+            <p class="info-p" ></p>
+            <p class="info-p" ></p>
+            <p class="info-p" ></p>
         </div>    
         <div class="actions d-flex">
             <div class="row-btn">
                 <button class="btn mybtn add-btn" type="button">Add a book</button>
-                <button class="btn btn-danger" type="button">Delete all books</button>
+                <button class="btn btn-danger delete-all-btn" type="button">Delete all books</button>
             </div>
-          
-            <h4 >Marque all as :</h4>
-            <div class="row-btn">
-                <button class="btn mybtn" type="button">read</button>
-                <button class="btn mybtn" type="button">unread</button>
-            </div>
+
         </div>
     </div>
     
     <div class="wrapp">
-        <div class="search">
-            <input type="text" name="search" id="search" placeholder="Type a book name/author name you are seeking..." autocomplete="off">
-            <i class="fa-solid fa-search"></i>
-        </div>
+      
         
     <div class="books">
         <table>
@@ -61,20 +53,24 @@
         <form >
             <div class="roww">
                 <label for="title">Book title</label>
-                <input type="text" name="title" id="title">
+                <input type="text" name="title" id="title"  class="form-input">
+                <p class="error-msg"></p>
             </div>
             <div class="roww">
                 <label for="author">Book author</label>
-                <input type="text" name="author" id="author">
+                <input type="text" name="author" id="author" class="form-input">
+                <p class="error-msg"></p>
+
             </div>
             <div class="roww">
                 <label for="page">Total pages</label>
-                <input type="number" name="page" id="page">
+                <input type="number" name="page" id="page" class="form-input">
+                <p class="error-msg"></p>
             </div>
 
             <div class=" read-row">
-                <input type="checkbox" name="read" id="read">
-                <label for="read">&nbsp;I have read the book</label>
+                <input type="checkbox" name="status" id="status" class="form-input">
+                <label for="status">&nbsp;I have read the book</label>
             </div>
             <i class="fa-solid fa-xmark text-danger close-btn"></i>
             <button class="btn mybtn submit-btn" type="submit">Submit</button>
@@ -82,11 +78,12 @@
         </form>
     </div>
 
+
     <div class="delete-all-books-window hidden">
         <div class="delete-all-books-popup">
             <p>Are you sure you want to proceed?</p>
             <div class="roww">
-                <button class="btn btn-danger">Confirm</button>
+                <button class="btn btn-danger confirm-btn">Confirm</button>
                 <button class="btn mybtn btn-cancel">Cancel</button>
             </div>
         </div>
