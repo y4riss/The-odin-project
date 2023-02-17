@@ -72,17 +72,55 @@ class Board {
 }
 
 class AI {
-  constructor(symbol) {
-    this.symbol = symbol;
-  }
+  static minimax(board, depth, isMaximising) {
+    // checking if game is over
+    const win = board.checkWinner();
+    if (win) {
+      // if there is a winner
+      if (win.winner == 'X') return 100 - depth;
+      if (win.winner == '0') return -100 + depth;
+      if (win.winner == 'Draw') return 0;
+    }
+    // if (depth == 0)
+    // {
+    //     return
+    // }
 
-  static getBestMove(board, depth, isMaximising) {}
+    // loop throu all available spots in the gameBoard
+    if (isMaximising) {
+      let bestScore = -Infinity;
+      let position;
+      for (let i = 0; i < 9; i++) {
+        if (board[i] != '') continue;
+        board[i] = 'X';
+        const score = this.minimax(board, depth + 1, !isMaximising);
+        board[i] = '';
+        if (score > bestScore) {
+          bestScore = score;
+          position = i;
+        }
+      }
+      return position;
+    }
+    if (!isMaximising) {
+      let bestScore = Infinity;
+      let position;
+      for (let i = 0; i < 9; i++) {
+        if (board[i] != '') continue;
+        board[i] = 'X';
+        const score = this.minimax(board, depth + 1, !isMaximising);
+        board[i] = '';
+        if (score < bestScore) {
+          bestScore = score;
+          position = i;
+        }
+      }
+      return position;
+    }
+  }
 }
 
-let board = new Board(['x', 'o', 'x', 'x', 'o', 'o', 'o', 'o', 'x']);
+let board = new Board(['x', '', '', '', '', '', '', '', '']);
 board.printFormattedBoard();
-console.log(board.isEmpty());
-console.log(board.isFull());
-console.log(board.checkWinner());
-
+AI.minimax(Object.assign({}, board), 0, false);
 // step 1 : loop throu all the possibilities
