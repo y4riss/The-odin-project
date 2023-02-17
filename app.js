@@ -29,6 +29,7 @@ class Board {
 
     // check horizontal
     for (let i = 0; i < 3; i++) {
+      if (this.state[i * 3] == '') continue;
       if (
         this.state[i * 3] == this.state[i * 3 + 1] &&
         this.state[i * 3 + 1] == this.state[i * 3 + 2]
@@ -38,6 +39,8 @@ class Board {
 
     // check vertical
     for (let i = 0; i < 3; i++) {
+      if (this.state[i] == '') continue;
+
       if (
         this.state[i] == this.state[i + 3] &&
         this.state[i + 3] == this.state[i + 6]
@@ -46,9 +49,17 @@ class Board {
     }
 
     // check diagonal
-    if (this.state[0] == this.state[4] && this.state[4] == this.state[8])
+    if (
+      this.state[4] &&
+      this.state[0] == this.state[4] &&
+      this.state[4] == this.state[8]
+    )
       return { winner: this.state[4], direction: 'D', row: 0 }; // left diag
-    if (this.state[2] == this.state[4] && this.state[4] == this.state[6])
+    if (
+      this.state[4] &&
+      this.state[2] == this.state[4] &&
+      this.state[4] == this.state[6]
+    )
       return { winner: this.state[4], direction: 'D', row: 1 }; // right diag
 
     if (this.isFull()) return { winner: 'Draw' };
@@ -81,46 +92,48 @@ class AI {
       if (win.winner == '0') return -100 + depth;
       if (win.winner == 'Draw') return 0;
     }
-    // if (depth == 0)
-    // {
-    //     return
-    // }
 
     // loop throu all available spots in the gameBoard
     if (isMaximising) {
       let bestScore = -Infinity;
-      let position;
       for (let i = 0; i < 9; i++) {
-        if (board[i] != '') continue;
-        board[i] = 'X';
-        const score = this.minimax(board, depth + 1, !isMaximising);
-        board[i] = '';
-        if (score > bestScore) {
-          bestScore = score;
-          position = i;
-        }
+        if (board.state[i] != '') continue;
+        board.state[i] = 'X';
+        const score = this.minimax(board, depth + 1, false);
+        board.state[i] = '';
+        bestScore = Math.max(score, bestScore);
       }
-      return position;
-    }
-    if (!isMaximising) {
+      return bestScore;
+    } else {
       let bestScore = Infinity;
-      let position;
       for (let i = 0; i < 9; i++) {
-        if (board[i] != '') continue;
-        board[i] = 'X';
-        const score = this.minimax(board, depth + 1, !isMaximising);
-        board[i] = '';
-        if (score < bestScore) {
-          bestScore = score;
-          position = i;
-        }
+        if (board.state[i] != '') continue;
+        board.state[i] = '0';
+        const score = this.minimax(board, depth + 1, true);
+        board.state[i] = '';
+        bestScore = Math.min(score, bestScore);
       }
-      return position;
+      return bestScore;
     }
   }
 }
 
-let board = new Board(['x', '', '', '', '', '', '', '', '']);
+let board = new Board(['', '', '', '', '', '', '', '', '']);
 board.printFormattedBoard();
-AI.minimax(Object.assign({}, board), 0, false);
+// let x = AI.minimax(board, 0, false);
+
+let position;
+let bestScore = -Infinity;
+
+for (let i = 0; i < 9; i++) {
+  if (board.state[i] != '') continue;
+  board.state[i] = 'X';
+  const score = AI.minimax(board, 0, false);
+  board.state[i] = '';
+  if (score > bestScore) {
+    bestScore = score;
+    position = i;
+  }
+}
+console.log(position);
 // step 1 : loop throu all the possibilities
