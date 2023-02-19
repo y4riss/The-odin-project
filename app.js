@@ -99,7 +99,7 @@ class AI {
       for (let i = 0; i < 9; i++) {
         if (board.state[i] != '') continue;
         board.state[i] = 'X';
-        const score = this.minimax(board, depth + 1, false);
+        const score = this.minimax(board, depth + 1, !isMaximising);
         board.state[i] = '';
         bestScore = Math.max(score, bestScore);
       }
@@ -109,31 +109,34 @@ class AI {
       for (let i = 0; i < 9; i++) {
         if (board.state[i] != '') continue;
         board.state[i] = '0';
-        const score = this.minimax(board, depth + 1, true);
+        const score = this.minimax(board, depth + 1, !isMaximising);
         board.state[i] = '';
         bestScore = Math.min(score, bestScore);
       }
       return bestScore;
     }
   }
+
+  static findBestMove() {
+    let position;
+    let bestScore = -Infinity;
+    for (let i = 0; i < 9; i++) {
+      if (board.state[i] != '') continue;
+      board.state[i] = 'X';
+      const score = AI.minimax(board, 0, false);
+      board.state[i] = '';
+      if (score > bestScore) {
+        bestScore = score;
+        position = i;
+      }
+    }
+    return position;
+  }
 }
 
-let board = new Board(['', '', '', '', '', '', '', '', '']);
+let board = new Board(['X', '', '', '', '', '', '', '', '']);
 board.printFormattedBoard();
 // let x = AI.minimax(board, 0, false);
 
-let position;
-let bestScore = -Infinity;
-
-for (let i = 0; i < 9; i++) {
-  if (board.state[i] != '') continue;
-  board.state[i] = 'X';
-  const score = AI.minimax(board, 0, false);
-  board.state[i] = '';
-  if (score > bestScore) {
-    bestScore = score;
-    position = i;
-  }
-}
-console.log(position);
+console.log(AI.findBestMove());
 // step 1 : loop throu all the possibilities
