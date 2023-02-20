@@ -20,7 +20,7 @@ class Board {
         this.state[i * 3] == this.state[i * 3 + 1] &&
         this.state[i * 3 + 1] == this.state[i * 3 + 2]
       )
-        return { winner: this.state[i * 3], direction: 'H', row: i };
+        return { winner: this.state[i * 3], direction: 'horizontal', row: i };
     }
 
     // check vertical
@@ -31,7 +31,7 @@ class Board {
         this.state[i] == this.state[i + 3] &&
         this.state[i + 3] == this.state[i + 6]
       )
-        return { winner: this.state[i], direction: 'V', row: i };
+        return { winner: this.state[i], direction: 'vertical', row: i };
     }
 
     // check diagonal
@@ -40,13 +40,13 @@ class Board {
       this.state[0] == this.state[4] &&
       this.state[4] == this.state[8]
     )
-      return { winner: this.state[4], direction: 'D', row: 0 }; // left diag
+      return { winner: this.state[4], direction: 'diag', row: 0 }; // left diag
     if (
       this.state[4] &&
       this.state[2] == this.state[4] &&
       this.state[4] == this.state[6]
     )
-      return { winner: this.state[4], direction: 'D', row: 1 }; // right diag
+      return { winner: this.state[4], direction: 'diag', row: 1 }; // right diag
 
     if (this.isFull()) return { winner: 'Draw' };
 
@@ -149,9 +149,15 @@ class UserInterface {
 
   static displayWinner(win) {
     const outro = document.querySelector('.outro');
+    const line = document.querySelector('.line');
+
     if (win.winner == 'Draw')
       outro.firstChild.nextSibling.textContent = 'This is a Draw';
-    else outro.firstChild.nextSibling.textContent = `${win.winner} has won`;
+    else {
+      line.classList.remove('hidden');
+      line.classList.add(`${win.direction}${win.row}`);
+      outro.firstChild.nextSibling.textContent = `${win.winner} has won`;
+    }
     outro.classList.remove('hidden');
   }
 
