@@ -1,5 +1,5 @@
 class Board {
-  constructor(state = ['', '', '', '', '', '', '', '']) {
+  constructor(state = ['', '', '', '', '', '', '', '', '']) {
     this.state = state;
   }
 
@@ -70,30 +70,29 @@ class AI {
   }
 
   minimax(board, depth, isMaximising) {
-    // checking if game is over
     const win = board.checkWinner();
     if (win) {
-      // if there is a winner
-      if (win.winner == 'X') return 100 - depth;
-      if (win.winner == '0') return -100 + depth;
+      const playerSymbol = this.symbol == 'X' ? '0' : 'X';
+      if (win.winner == this.symbol) return 100 - depth;
+      if (win.winner == playerSymbol) return -100 + depth;
       if (win.winner == 'Draw') return 0;
     }
 
     if (isMaximising) {
-      let bestScore = -Infinity;
+      let bestScore = -1000;
       for (let i = 0; i < 9; i++) {
         if (board.state[i] != '') continue;
-        board.state[i] = 'X';
+        board.state[i] = this.symbol;
         const score = this.minimax(board, depth + 1, !isMaximising);
         board.state[i] = '';
         bestScore = Math.max(score, bestScore);
       }
       return bestScore;
     } else {
-      let bestScore = Infinity;
+      let bestScore = 1000;
       for (let i = 0; i < 9; i++) {
         if (board.state[i] != '') continue;
-        board.state[i] = '0';
+        board.state[i] = this.symbol == 'X' ? '0' : 'X';
         const score = this.minimax(board, depth + 1, !isMaximising);
         board.state[i] = '';
         bestScore = Math.min(score, bestScore);
@@ -102,12 +101,12 @@ class AI {
     }
   }
 
-   findBestMove(board) {
+  findBestMove(board) {
     let position;
-    let bestScore = -Infinity;
+    let bestScore = -1000;
     for (let i = 0; i < 9; i++) {
       if (board.state[i] != '') continue;
-      board.state[i] = 'X';
+      board.state[i] = this.symbol;
       const score = this.minimax(board, 0, false);
       board.state[i] = '';
       if (score > bestScore) {
@@ -119,14 +118,8 @@ class AI {
   }
 }
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-// this class will render to dom
 class UserInterface {
   static displayMove(symbol, elem, index) {
-    //  await sleep(500);
     elem.firstChild.textContent = symbol;
     elem.style.pointerEvents = 'none';
   }
@@ -136,9 +129,6 @@ class UserInterface {
   const player = new Player('X');
   const ai = new AI('0');
   const board = new Board();
-
-  let currentMove = player.symbol;
-
 
   const cells = document.querySelectorAll('.cell');
   cells.forEach((cell) => {
@@ -150,8 +140,6 @@ class UserInterface {
       board.insert(ai.symbol, bestMoveIndex);
       const target = document.querySelector(`[data-index='${bestMoveIndex}'`);
       UserInterface.displayMove(ai.symbol, target, bestMoveIndex);
-      console.log(target,bestMoveIndex,board.state);
     });
   });
-
 })();
