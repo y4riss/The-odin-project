@@ -142,7 +142,7 @@ class UserInterface {
 
     container.classList.add('hidden');
     intro.classList.remove('hidden');
-    await sleep(0);
+    await sleep(6000);
     intro.classList.add('hidden');
     board.classList.remove('hidden');
   }
@@ -197,7 +197,7 @@ class UserInterface {
       const ai = new AI('0');
       cells.forEach((cell) => {
         cell.addEventListener('click', (e) => {
-            playerVSai(e, player, ai);
+          playerVSai(e, player, ai);
         });
       });
     }
@@ -217,9 +217,9 @@ class UserInterface {
     const bestMoveIndex = ai.findBestMove(board);
     board.insert(ai.symbol, bestMoveIndex);
     const target = document.querySelector(`[data-index='${bestMoveIndex}'`);
-    boardHTML.style.pointerEvents = "none";
+    boardHTML.style.pointerEvents = 'none';
     await sleep(1000);
-    boardHTML.style.pointerEvents = "all";
+    boardHTML.style.pointerEvents = 'all';
     UserInterface.displayMove(ai.symbol, target);
     win = board.checkWinner();
     if (win) {
