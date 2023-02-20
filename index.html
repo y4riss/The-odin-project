@@ -9,7 +9,14 @@
 </head>
 <body>
     
-    <div class="board">
+    <div class="container ">
+        <h1>Tic Tac Toe</h1>
+        <div class="btns">
+            <button type="button" class="vs-player">vs Player</button>
+            <button type="button" class="vs-ai">vs AI</button>
+        </div>
+    </div>
+    <div class="board hidden">
         <div class="cell" data-index="0"><span class="move"></span></div>
         <div class="cell" data-index="1"><span class="move"></span></div>
         <div class="cell" data-index="2"><span class="move"></span></div>
@@ -19,6 +26,14 @@
         <div class="cell" data-index="6"><span class="move"></span></div>
         <div class="cell" data-index="7"><span class="move"></span></div>
         <div class="cell" data-index="8"><span class="move"></span></div>
+    </div>
+
+    <div class="intro hidden">
+    </div>
+
+    <div class="outro hidden">
+        <h4></h4>
+        <button type="button" class="replay">Replay</button>
     </div>
     <script src="app.js" ></script>
 </body>
