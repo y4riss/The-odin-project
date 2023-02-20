@@ -1,7 +1,3 @@
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 class Board {
   constructor(state = ['', '', '', '', '', '', '', '', '']) {
     this.state = state;
@@ -61,9 +57,8 @@ class Board {
     this.state[index] = symbol;
   }
 
-  resetBoard()
-  {
-    this.state = ['', '', '', '', '', '', '', '', '']
+  resetBoard() {
+    this.state = ['', '', '', '', '', '', '', '', ''];
   }
 }
 
@@ -128,7 +123,7 @@ class AI {
 }
 
 class UserInterface {
-  static  displayMove(symbol, elem) {
+  static displayMove(symbol, elem) {
     elem.firstChild.textContent = symbol;
     elem.style.pointerEvents = 'none';
   }
@@ -147,7 +142,7 @@ class UserInterface {
 
     container.classList.add('hidden');
     intro.classList.remove('hidden');
-    await sleep(6000);
+    await sleep(0);
     intro.classList.add('hidden');
     board.classList.remove('hidden');
   }
@@ -155,19 +150,18 @@ class UserInterface {
   static displayWinner(win) {
     const outro = document.querySelector('.outro');
     if (win.winner == 'Draw')
-    outro.firstChild.nextSibling.textContent = 'This is a Draw'
+      outro.firstChild.nextSibling.textContent = 'This is a Draw';
     else outro.firstChild.nextSibling.textContent = `${win.winner} has won`;
     outro.classList.remove('hidden');
   }
 
-  static resetBoard()
-  {
+  static resetBoard() {
     const cells = document.querySelectorAll('.cell');
 
-    cells.forEach(cell => {
+    cells.forEach((cell) => {
       cell.firstChild.textContent = '';
       cell.style.pointerEvents = 'all';
-    })
+    });
   }
 }
 
@@ -203,13 +197,13 @@ class UserInterface {
       const ai = new AI('0');
       cells.forEach((cell) => {
         cell.addEventListener('click', (e) => {
-          playerVSai(e, player, ai);
+            playerVSai(e, player, ai);
         });
       });
     }
   };
 
-  const playerVSai = async(e, player, ai) => {
+  const playerVSai = async (e, player, ai) => {
     const boardHTML = document.querySelector('.board');
     const index = e.target.dataset.index;
     let win;
@@ -223,7 +217,9 @@ class UserInterface {
     const bestMoveIndex = ai.findBestMove(board);
     board.insert(ai.symbol, bestMoveIndex);
     const target = document.querySelector(`[data-index='${bestMoveIndex}'`);
+    boardHTML.style.pointerEvents = "none";
     await sleep(1000);
+    boardHTML.style.pointerEvents = "all";
     UserInterface.displayMove(ai.symbol, target);
     win = board.checkWinner();
     if (win) {
@@ -248,5 +244,8 @@ class UserInterface {
   replayBtn.addEventListener('click', () => {
     location.reload();
   });
-
 })();
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
