@@ -3,20 +3,6 @@ class Board {
     this.state = state;
   }
 
-  printFormattedBoard() {
-    let formattedString = '';
-    this.state.forEach((cell, index) => {
-      formattedString += cell ? ` ${cell} |` : '   |';
-      if ((index + 1) % 3 == 0) {
-        formattedString = formattedString.slice(0, -1);
-        if (index < 8)
-          formattedString +=
-            '\n\u2015\u2015\u2015 \u2015\u2015\u2015 \u2015\u2015\u2015\n';
-      }
-    });
-    console.log('%c' + formattedString, 'color: #6d4e42;font-size:16px');
-  }
-
   isEmpty() {
     return this.state.every((cell) => cell == '');
   }
@@ -67,23 +53,23 @@ class Board {
     return null;
   }
 
-  insert(symbol, position) {
-    if (this.state[position] || position > 8 || position < 0) return false;
-    this.state[position] = symbol;
-    return true;
+  insert(symbol, index) {
+    this.state[index] = symbol;
   }
+}
 
-  //   getAvailableMoves() {
-  //     const moves = [];
-  //     this.state.forEach((cell, index) => {
-  //       if (!cell) moves.push(index);
-  //     });
-  //     return moves;
-  //   }
+class Player {
+  constructor(symbol) {
+    this.symbol = symbol;
+  }
 }
 
 class AI {
-  static minimax(board, depth, isMaximising) {
+  constructor(symbol) {
+    this.symbol = symbol;
+  }
+
+  minimax(board, depth, isMaximising) {
     // checking if game is over
     const win = board.checkWinner();
     if (win) {
@@ -93,7 +79,6 @@ class AI {
       if (win.winner == 'Draw') return 0;
     }
 
-    // loop throu all available spots in the gameBoard
     if (isMaximising) {
       let bestScore = -Infinity;
       for (let i = 0; i < 9; i++) {
@@ -117,13 +102,13 @@ class AI {
     }
   }
 
-  static findBestMove() {
+   findBestMove(board) {
     let position;
     let bestScore = -Infinity;
     for (let i = 0; i < 9; i++) {
       if (board.state[i] != '') continue;
       board.state[i] = 'X';
-      const score = AI.minimax(board, 0, false);
+      const score = this.minimax(board, 0, false);
       board.state[i] = '';
       if (score > bestScore) {
         bestScore = score;
@@ -134,9 +119,39 @@ class AI {
   }
 }
 
-let board = new Board(['X', '', '', '', '', '', '', '', '']);
-board.printFormattedBoard();
-// let x = AI.minimax(board, 0, false);
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-console.log(AI.findBestMove());
-// step 1 : loop throu all the possibilities
+// this class will render to dom
+class UserInterface {
+  static displayMove(symbol, elem, index) {
+    //  await sleep(500);
+    elem.firstChild.textContent = symbol;
+    elem.style.pointerEvents = 'none';
+  }
+}
+
+(function Game() {
+  const player = new Player('X');
+  const ai = new AI('0');
+  const board = new Board();
+
+  let currentMove = player.symbol;
+
+
+  const cells = document.querySelectorAll('.cell');
+  cells.forEach((cell) => {
+    cell.addEventListener('click', (e) => {
+      const index = e.target.dataset.index;
+      board.insert(player.symbol, index);
+      UserInterface.displayMove(player.symbol, e.target, index);
+      const bestMoveIndex = ai.findBestMove(board);
+      board.insert(ai.symbol, bestMoveIndex);
+      const target = document.querySelector(`[data-index='${bestMoveIndex}'`);
+      UserInterface.displayMove(ai.symbol, target, bestMoveIndex);
+      console.log(target,bestMoveIndex,board.state);
+    });
+  });
+
+})();
