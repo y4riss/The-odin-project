@@ -142,7 +142,7 @@ class UserInterface {
 
     container.classList.add('hidden');
     intro.classList.remove('hidden');
-    await sleep(6000);
+    await sleep(2000);
     intro.classList.add('hidden');
     board.classList.remove('hidden');
   }
