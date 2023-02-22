@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap');
+*{
+    padding : 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+}
+
+body{
+    background : #5B0017;
+}
+
+nav {
+    margin : 2rem auto;
+    display : flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom : 8rem;
+}
+nav button{
+    color : #D6BFC5;
+    margin : 0 2rem;
+    font-size : 1.1rem;
+    border : none;
+    outline : none;
+    background : transparent;
+    cursor : pointer;
+    
+}
+
+.active-nav-btn{
+    background : #844051;
+    padding : .4rem 1rem;
+    border-radius: 4px;
+}
+
+
+header{
+    display : grid;
+    grid-template-columns: 4fr 1fr;
+    padding : 1rem;
+    height : 100vh;
+}
+header h1{
+    font-size: 5rem;
+    color : #fff;
+    background : #5b00178d;
+    width : 80%;
+    position: relative;
+    z-index: 99;
+
+   
+}
+
+header p{
+    color : #D6BFC5;
+    width: 35ch;
+}
+
+
+.right
+{
+    position:relative;
+}
+
+header button{
+
+    color : #D6BFC5;
+    font-size : 1.5rem;
+    border : 2px solid #CC9D2F;
+    outline : none;
+    background : transparent;
+    cursor : pointer;
+    padding : .4rem 1rem;
+    margin-top : 1rem;
+}
+
+header button:active{
+    background-color : #CC9D2F;
+    border-color :#D6BFC5;
+    color :#5B0017;
+}
+header img{
+    position: absolute;
+    right : 0;
+}
+
+
+@media screen and (max-width : 950px){
+    
+    header{
+        grid-template-columns: 1fr;
+    }
+    header h1{
+        width : 100%;
+        font-size : 4rem;
+    }
+
+    header img{
+        display: none;
+    }
+
+}
