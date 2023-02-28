@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap');
+*{
+    padding : 0;
+    margin : 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+
+}
+
+p,div,span{
+    margin:0;
+    padding :0;
+}
+body{
+
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    height: 100vh;
+    width: 100%;
+    background: url('https://images.unsplash.com/photo-1474356026809-a36202016424?crop=entropy&cs=tinysrgb&fm=jpg&ixid=Mnw0MTY1OTR8MHwxfHNlYXJjaHwxfHxvdmVyY2FzdCUyMGNsb3VkcyUyMGxhbmRzY2FwZXxlbnwwfHx8fDE2Nzc2MDgxODM&ixlib=rb-4.0.3&q=80') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/*__________LEFT PART_________________*/
+.left{
+
+    display: flex;
+    align-items: center;
+    padding-inline: 5%;
+    color : white;
+}
+
+.left *{
+    margin-inline : .8rem;
+}
+.city p:first-child{
+    font-size: 2rem;
+}
+
+.city p:nth-child(2){
+    font-size : .85rem;
+}
+
+.temp{
+    font-size: 6rem;
+    position: relative;
+}
+
+.temp::after{
+    content: 'o';
+    font-size: 2rem;
+    position: absolute;
+    top : 3%;
+    font-weight: bolder;
+}
+
+/*_______________RIGHT PART_________________*/
+.right{
+    background : rgba(20, 20, 20, 0.827);
+    padding : 10%;
+    color : rgb(201, 201, 201);
+}
+
+input{
+    outline : none;
+    border : none;
+    padding : .6rem .3rem;
+    background-color: transparent;
+    border-bottom: 1px solid rgb(201, 201, 201);
+    width : 100%;
+    color : rgb(201, 201, 201);
+}
+
+.search{
+    position: relative;
+}
+
+.search i{
+    position:absolute;
+    top : 25%;
+    right : 10px;
+    cursor: pointer;
+}
+
+.title1{
+
+    margin-top : 3rem;
+    margin-bottom : 1rem;
+    border-bottom: 1px solid rgb(201, 201, 201);
+    padding-block: 1em;
+}
+
+.info{
+    display: grid;
+    gap : 1rem;
+}
+.info div:first-child p:nth-child(2){
+    position: relative;
+    width: max-content;
+}
+.info div:first-child p:nth-child(2)::after{
+    content: 'o';
+    position: absolute;
+    right: 25%;
+    top : -3px;
+    font-size: 75%;
+}
+.info div{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.info i{
+    margin-right : 10px;
+}
