@@ -64,3 +64,10 @@ const displayData = (data, iconUrl, imgUrl) => {
 // getData("https://api.openweathermap.org/data/2.5/weather?q=morocco&appid=1f8477c0ecddc564b9091bb123c6f6c4&units=")
 
 //let img_url = ``
+
+window.onload = ()=>{
+
+  const url = `/weather?q=Casablanca&units=metric`;
+  getData(url);
+
+}
