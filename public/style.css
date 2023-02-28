@@ -31,6 +31,25 @@ body{
     align-items: center;
     padding-inline: 5%;
     color : white;
+    background-color: #812e1133;
+}
+
+.left img{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.img-description{
+
+    display: flex;
+    flex-direction: column;
+    width: 5rem;
+
+}
+
+.img-description p::first-letter{
+    text-transform: uppercase;
 }
 
 .left *{
@@ -44,12 +63,12 @@ body{
     font-size : .85rem;
 }
 
-.temp{
+#temp{
     font-size: 6rem;
     position: relative;
 }
 
-.temp::after{
+#temp::after{
     content: 'o';
     font-size: 2rem;
     position: absolute;
@@ -104,8 +123,8 @@ input{
 .info div:first-child p:nth-child(2)::after{
     content: 'o';
     position: absolute;
-    right: 25%;
-    top : -3px;
+    right: -10px;
+    top : -5px;
     font-size: 75%;
 }
 .info div{
@@ -116,3 +135,29 @@ input{
 .info i{
     margin-right : 10px;
 }
+
+
+
+@media screen  and (max-width : 690px){
+    
+    body{
+        grid-template-columns: 1fr;
+        grid-template-rows: 2fr 1fr;
+    }
+    .left{
+        height: 60vh;
+
+    }
+}
+
+/* @media screen  and (max-width : 325px){
+    
+    body{
+        grid-template-columns: 1fr;
+        grid-template-rows: 2fr 1fr;
+    }
+    .left{
+        height: 60vh;
+
+    }
+} */
