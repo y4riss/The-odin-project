@@ -3,14 +3,16 @@ const getData = async (url) => {
     const body = await fetch(url);
     const data = await body.json();
     const icon = await fetch(
-      `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
     );
-    const imgBody = await fetch(`/img?query=${data.name} landscape ${data.weather[0].description}`);
+    const imgBody = await fetch(
+      `/img?query=${data.name} landscape ${data.weather[0].description}`
+    );
     const imgData = await imgBody.json();
     const imgUrl = imgData.results[Math.floor(Math.random() * 10)].urls.full;
     displayData(data, icon.url, imgUrl);
   } catch (error) {
-    alert("Please enter a valid city name")
+    alert('Please enter a valid city name');
   }
 };
 

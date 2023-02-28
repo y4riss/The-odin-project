@@ -56,23 +56,24 @@ body{
     margin-inline : .8rem;
 }
 .city p:first-child{
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
 .city p:nth-child(2){
-    font-size : .85rem;
+    font-size : 1rem;
 }
 
 #temp{
-    font-size: 6rem;
+    font-size: 8rem;
     position: relative;
 }
 
 #temp::after{
     content: 'o';
-    font-size: 2rem;
+    font-size: 3rem;
     position: absolute;
-    top : 3%;
+    top : 0;
+    right:-10px;
     font-weight: bolder;
 }
 
@@ -136,7 +137,9 @@ input{
     margin-right : 10px;
 }
 
-
+*{
+    font-size: 110%;
+}
 
 @media screen  and (max-width : 690px){
     
