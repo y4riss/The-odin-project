@@ -3,7 +3,7 @@
 ![the odin project logo](https://www.theodinproject.com/assets/og-logo-022832d4cefeec1d5266237be260192f5980f9bcbf1c9ca151b358f0ce1fd2df.png)
 
 
-    This repository contains my progress and portfolio as I work my way through The Odin Project's web development curriculum.
+This repository contains my progress and portfolio as I work my way through The Odin Project's web development curriculum.
 
 
 # Overview
