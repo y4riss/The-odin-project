@@ -57,9 +57,9 @@ class Board {
     this.state[index] = symbol;
   }
 
-  resetBoard() {
-    this.state = ['', '', '', '', '', '', '', '', ''];
-  }
+  // resetBoard() {
+  //   this.state = ['', '', '', '', '', '', '', '', ''];
+  // }
 }
 
 class Player {
@@ -161,14 +161,14 @@ class UserInterface {
     outro.classList.remove('hidden');
   }
 
-  static resetBoard() {
-    const cells = document.querySelectorAll('.cell');
+  // static resetBoard() {
+  //   const cells = document.querySelectorAll('.cell');
 
-    cells.forEach((cell) => {
-      cell.firstChild.textContent = '';
-      cell.style.pointerEvents = 'all';
-    });
-  }
+  //   cells.forEach((cell) => {
+  //     cell.firstChild.textContent = '';
+  //     cell.style.pointerEvents = 'all';
+  //   });
+  // }
 }
 
 (function Game() {
