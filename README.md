@@ -24,7 +24,7 @@ So far, I have completed the following sections of The Odin Project curriculum (
 - Intermediate HTML and CSS
 - Javascript ( *Currently at the react section...* )
 
-I have also completed several additional projects, that you can find in this repo.
+I have also completed several additional projects, that you can find in this repo ( explore the branches ).
 
 # Future Plans
 In the future, I plan to continue working through The Odin Project curriculum and building my portfolio of projects. I also want to expand my knowledge by learning new technologies, and further develop my skills in web development.
